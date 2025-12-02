@@ -246,7 +246,7 @@ void BLEClientHID::send_input_report_event(esp_ble_gattc_cb_param_t *p_data) {
               std::to_string(value.usage.usage);
     }
     #ifdef USE_API
-    this->fire_homeassistant_event("esphome.hid_events", {{"usage", usage}, {"value", std::to_string(value.value)}});
+    this->fire_homeassistant_event("esphome.hid_events", {{"mac", this->parent()->address_str().c_str()}, {"usage", usage}, {"value", std::to_string(value.value)}});
     ESP_LOGD(TAG, "Send HID event to HomeAssistant: usage: %s, value: %d", usage.c_str(), value.value);
     #endif
     if(this->last_event_usage_text_sensor != nullptr){
